@@ -173,6 +173,9 @@ f
 <!-- Run a test to see if optimism scores pre- and post
 watching videos depends on sex.-->
 
+summary(aov(optimismscore~testtime*sex+Error(subject/testtime),data=politics))
+
+<!--At F(1,64)=0.119, p=0.731, optimism scores were not related to sex.  They were, however, related to testtime F(1,64)=41.299, p<.001.  Additionally, there were no interactions between testtime and sex F(1,64)=0.049, p=0.825-->
 
 <!-- Run a Multiple Regression Analysis to see
 whether you can predict someones posttest optimism
