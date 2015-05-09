@@ -17,10 +17,10 @@ as you would in an APA style manuscript. For any symbols
 you don't know how to use/can't use, feel free to use the name
 instead (e.g. alpha)
 --> 
-asdf
+
 <!-- Load the politics.csv data file. -->
 
-
+pols<-read.csv("politics.csv")
 
 <!-- 
 Check the structure.
@@ -28,11 +28,17 @@ subject, party, testtime, minwage, and sex need to be factors.
 optimismscore and income should be integer and numeric vectors.
 Fix any variables that aren't right.
 -->
+<!-- Since I want to take into account your preferences, as you mentioned in the Example, I also utilized the below commands. -->
 
-
+str(pols)
+pols$subject<-factor(pols$subject)
+pols$testtime<-factor(pols$testtime, levels=c("pre", "post"))
 <!-- Find the minimum, mean, and variance for posttest
 optimism scores. -->
+<!-- I could do this two ways.  Either the way I presented it below or, alternately, I could forego the summary and use the min(pols$omtimismscore[pols$testtime=="post"]) and mean(pols$optimismscore[pols$testtime=="post"]) as well as the var(pols$optimismscore[pols$testtime=="post"]).  I simply thought I'd kill two birds with one stone and use two commands instead of three.-->
 
+summary(pols$optimismscore[pols$testtime=="post"])
+var(pols$optimismscore[pols$testtime=="post"])
 
 <!-- Create a histogram of posttest optimism scores.
 Feel free to use the default ugly settings since
@@ -41,6 +47,7 @@ you're a real go-getter, see if you can figure
 out how to make a prettier histogram with better
 labels, etc. using ggplot2. -->
 
+hist(pols$optimismscore[pols$testtime=="post"])
 
 <!-- Run a test to determine whether political affiliation
 is independent of one's gender.
@@ -48,12 +55,43 @@ Present the data supporting your analyses in graphical or
 tabular form.
 -->
 
+<!-- Again, there are two ways to do this.  Either the way I do it below or using testtime=="post".  Either will get you the answer.
+-->
+
+tab<-table(pols$party[pols$testtime=="pre"],pols$sex[pols$testtime=="pre"])
+tab
+
+chisq.test(pols$party[pols$testtime=="pre"],pols$sex[pols$testtime=="pre"])
+
+<!--With a result of X-squared = 0.72674, df = 2, p-value = 0.6953, we can accept the null hypothesis -->
 
 <!-- Run a test to determine whether or not males and females
 have different incomes.
 Create a graph to display your data that includes the relevant
 means and standard errors.-->
 
+t.test(pols$income[pols$sex=="male" & pols$testtime=="pre"],pols$income[pols$sex=="female" & pols$testtime=="pre"])
+library("dplyr")
+temp<-pols[pols$testtime=="pre",]%>%group_by(sex)%>%summarize(means=mean(income),sems=sd(income)/sqrt(length(income)))
+library("ggplot2")
+f<-ggplot(temp,aes(x=factor(sex),y=means))+
+    geom_bar(stat="identity", color="black",fill=c("deeppink","deepskyblue2"))+
+    geom_errorbar(aes(ymax=means+sems, ymin=means-sems), width=.1)
+f
+f<-f+ggtitle("Incomes by Sex")+
+    labs(x="Sex", y="Incomes\n(higher=more income")+
+    scale_x_discrete(breaks=c("female","male"),labels=c("Female","Male"))+
+    theme(plot.title=element_text(size=15,face="bold",vjust=.5))+
+    theme(axis.title.x=element_text(size=12,face="bold",vjust=-.25))+
+    theme(axis.title.y=element_text(size=12,face="bold",vjust=1))+
+    theme(axis.text.x=element_text(size=10,face="bold",color="black"))+
+    theme(axis.text.y=element_text(size=10,face="bold",color="black"))+
+    coord_cartesian(ylim=c(min(temp$means)-2*max(temp$sems),max(temp$means)+2*max(temp$sems)))+
+    theme(panel.border=element_blank(), axis.line=element_line())+
+    theme(panel.grid.major.x=element_blank())+
+    theme(panel.grid.major.y=element_line(color="darkgrey"))+
+    theme(panel.grid.minor.y=element_blank())
+f
 
 <!-- See if male and females with different political affiliations
 have different posttest optimism scores. Create a graph to display
