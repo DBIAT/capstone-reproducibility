@@ -143,6 +143,32 @@ f
 <!-- Create a line graph for the same data. With
 error bars of course!-->
 
+f<-ggplot(temp, aes(x=party, y=means, group=sex, color=sex))+
+    geom_line(size=1)+
+    geom_point(size=2)+
+    scale_color_manual(values=c(col1,col2),name="Sex",breaks=c("female","male"),labels=c("Female", "Male"))+
+    geom_errorbar(aes(ymax=means+sems, ymin=means-sems),width=.2)+
+    ggtitle("Post-test Optimism Scores by Sex and Political Affiliation")+
+    labs(x="Political Party Affiliation",y="Post-test Optimism\n(Higher Value=Greater Optimism)")+
+    scale_x_discrete(breaks=c("democrat","independent","republican"),labels=c("Democrat","Independent","Republican"))+
+    theme(plot.title=element_text(size=15,face="bold",vjust=.5))+
+    theme(axis.title.x=element_text(size=12,face="bold",vjust=-.25))+
+    theme(axis.title.y=element_text(size=12,face="bold",vjust=1))+
+    theme(axis.text.x=element_text(size=10,face="bold",color="black"))+
+    theme(axis.text.y=element_text(size=10,face="bold",color="black"))+
+    coord_cartesian(ylim=c(min(temp$means)-2*max(temp$sems),max(temp$means)+2*max(temp$sems)))+
+    theme(panel.border=element_blank(),axis.line=element_line())+
+    theme(panel.grid.major.x=element_blank())+
+    theme(panel.grid.major.y=element_line(color="darkgrey"))+
+    theme(panel.grid.minor.y=element_blank())+
+    theme(legend.position=c(.2,.76))+
+    theme(legend.background=element_blank())+
+    theme(legend.background=element_rect(color="black"))+
+    theme(legend.title=element_blank())+
+    theme(legend.title=element_text(size=12))+
+    theme(legend.title.align=.5)+
+    theme(legend.text=element_text(size=10,face="bold"))
+f
 
 <!-- Run a test to see if optimism scores pre- and post
 watching videos depends on sex.-->
