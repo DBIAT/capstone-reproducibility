@@ -186,3 +186,4 @@ lines that best fit the data for both sexes regardless of
 whether the lines are warranted based on the statistical
 analyses-->
 
+summary(lm(optimismscore~optimismscore+party,data=pols[pols$testtime=="post",]))
