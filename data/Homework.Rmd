@@ -31,6 +31,13 @@ Fix any variables that aren't right.
 <!-- Since I want to take into account your preferences, as you mentioned in the Example, I also utilized the below commands. -->
 
 str(pols)
+head(politics$subject[politics$testtime=="pre"]==politics$subject[politics$testtime=="post"])
+trues<-politics$testtime=="pre"
+sum(!(politics$subject[trues]==politics$subject[!trues]))
+sum(!(politics$party[trues]==politics$party[!trues]))
+sum(!(politics$subject[trues]==politics$subject[!trues]))
+sum(!(politics$sex[trues]==politics$sex[!trues]))
+sum(!(politics$income[trues]==politics$income[!trues]))
 pols$subject<-factor(pols$subject)
 pols$testtime<-factor(pols$testtime, levels=c("pre", "post"))
 
