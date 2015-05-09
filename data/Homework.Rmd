@@ -33,6 +33,7 @@ Fix any variables that aren't right.
 str(pols)
 pols$subject<-factor(pols$subject)
 pols$testtime<-factor(pols$testtime, levels=c("pre", "post"))
+
 <!-- Find the minimum, mean, and variance for posttest
 optimism scores. -->
 <!-- I could do this two ways.  Either the way I presented it below or, alternately, I could forego the summary and use the min(pols$omtimismscore[pols$testtime=="post"]) and mean(pols$optimismscore[pols$testtime=="post"]) as well as the var(pols$optimismscore[pols$testtime=="post"]).  I simply thought I'd kill two birds with one stone and use two commands instead of three.-->
