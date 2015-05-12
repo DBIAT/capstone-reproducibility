@@ -166,6 +166,7 @@ With a score of F(2,60)=27.06, p<0.001 we can conclude that party is associated 
 <!-- Create a line graph for the same data. With
 error bars of course!-->
 
+And now a line graph...
 ```{r}
 f<-ggplot(temp, aes(x=party, y=means, group=sex, color=sex))+
     geom_line(size=1)+
