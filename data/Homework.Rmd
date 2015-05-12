@@ -58,6 +58,8 @@ summary(politics$optimismscore[politics$testtime=="post"])
 var(politics$optimismscore[politics$testtime=="post"])
 ```
 
+The min is 18, the mean is 59.82, and the variance for the posttest optimism scores is 336.27.
+
 <!-- Create a histogram of posttest optimism scores.
 Feel free to use the default ugly settings since
 we didn't cover how to do this in ggplot2. If
