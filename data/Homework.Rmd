@@ -23,7 +23,7 @@ instead (e.g. alpha)
 I need to load the data.  So...
 
 ```{r}
-politics<-read.csv("politics.csv")
+st
 ```
 
 <!-- 
@@ -33,7 +33,7 @@ optimismscore and income should be integer and numeric vectors.
 Fix any variables that aren't right.
 -->
 
-Since I want to take into account your preferences, as you mentioned in the Example, I also utilized the below commands in order to check the structure. 
+Since I want to take into account your preferences, as you mentioned in the Example, I also utilized the below commands in order to check the structure. Additionally, I made 'subject' a factor and refactored the 'pre' and 'post'.
 
 ```{r}
 str(politics)
