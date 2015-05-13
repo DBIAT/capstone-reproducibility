@@ -23,7 +23,7 @@ instead (e.g. alpha)
 I need to load the data.  So...
 
 ```{r}
-st
+politics<-read.csv("politics.csv")
 ```
 
 <!-- 
@@ -217,4 +217,4 @@ analyses-->
 ```{r}
 summary(lm(optimismscore[testtime=="post"]~optimismscore[testtime=="pre"]+party[testtime=="pre"],data=politics))
 ```
-At R2=0.90, F(3, 62)=180.3, p<.001, we can conclude that pretest optimism scores predict posttest optimism scores with a tight slope of 0.94, almost a one-for-one correlation.  
+At R2=0.90, F(3, 62)=180.3, p<.001, we can conclude that pretest optimism scores strongly predict posttest optimism scores with a tight slope of 0.94, almost a one-for-one correlation.  
